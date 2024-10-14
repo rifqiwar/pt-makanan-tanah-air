@@ -85,9 +85,6 @@ const OrderPopup: React.FC<OrderPopupProps> = ({
   return (
     <div className={styles.popup}>
       <div className={styles.popupContent}>
-        <button className={styles.closeButton} onClick={onClose}>
-          X
-        </button>
         <h2>Order Details</h2>
         <p>
           Pesanan:{" "}
@@ -133,7 +130,13 @@ const OrderPopup: React.FC<OrderPopupProps> = ({
           <option value="QRIS">QRIS</option>
         </select>
         <p>Total Pembayaran: Rp {calculateTotalPayment().toLocaleString()}</p>
-        <button onClick={handleSubmit}>Bayar</button>
+        <button className="bg-yellow-500 text-white p-2 rounded-full" onClick={handleSubmit}>Bayar</button>
+        <button className=" text-black p-2 rounded-full" onClick={onClose}>
+          Close
+        </button>
+        {/* <button className={styles.closeButton} onClick={onClose}>
+          X
+        </button> */}
       </div>
     </div>
   );

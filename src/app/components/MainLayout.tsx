@@ -183,7 +183,7 @@ const MainLayout: React.FC = () => {
           </div>
         ))}
       </main> */}
-      <div className="mt-4 grid grid-cols-2 gap-4">
+      <div className="mt-4  grid grid-cols-2 gap-4">
         {filteredMenu.map((item, index) => (
           <div key={item.id} className="bg-white p-4 rounded-lg shadow-md">
             <img
@@ -193,27 +193,6 @@ const MainLayout: React.FC = () => {
             />
             <div className="mt-2 flex justify-between items-center">
               <h3 className="font-bold">{item.name}</h3>
-              {/* <button className="bg-green-500 text-white p-2 rounded-full">
-                +
-              </button>
-              <button className="bg-green-500 text-white p-2 rounded-full">
-                -
-              </button> */}
-              <div>
-                <button
-                  className="bg-green-500 text-white p-1 rounded-full"
-                  onClick={() => handleQuantityChange(index, -1)}
-                >
-                  -
-                </button>
-                <span>{item.quantity}</span>
-                <button
-                  className="bg-green-500 text-white p-1 rounded-full"
-                  onClick={() => handleQuantityChange(index, 1)}
-                >
-                  +
-                </button>
-              </div>
             </div>
 
             <p>Rp {item.price.toLocaleString()}</p>
@@ -222,9 +201,33 @@ const MainLayout: React.FC = () => {
               <span className="ml-2 text-yellow-400">★</span>
               <span className="ml-1 text-gray-500">({item.reviews})</span>
             </div>
+            <br />
+            <hr />
+            <div className="mt-2 flex justify-around items-center">
+              <button
+                className="bg-green-500 text-white p-2 rounded-full"
+                onClick={() => handleQuantityChange(index, -1)}
+              >
+                -
+              </button>
+
+              <span>{item.quantity}</span>
+              <button
+                className="bg-green-500 text-white p-2 rounded-full"
+                onClick={() => handleQuantityChange(index, 1)}
+              >
+                +
+              </button>
+            </div>
           </div>
         ))}
       </div>
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
 
       {orderDetails.length > 0 && (
         <div className={styles.orderSummary}>
