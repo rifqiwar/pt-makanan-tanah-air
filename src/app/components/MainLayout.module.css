@@ -86,3 +86,34 @@
   cursor: pointer;
   font-weight: bold;
 }
+.counter {
+  display: flex;
+  align-items: center;
+}
+
+.counter button {
+  background-color: #7bc043;
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+.counter span {
+  margin: 0 10px;
+  font-size: 1.2em;
+}
+.clearButton {
+  background-color: #f44336; /* Red color for Clear button */
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-top: 10px;
+}
+
+.clearButton:hover {
+  background-color: #d32f2f; /* Darker red on hover */
+}
