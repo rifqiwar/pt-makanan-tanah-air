@@ -56,7 +56,7 @@ const OrderPopup: React.FC<OrderPopupProps> = ({
 
   const handleDistrictChange = (district: string) => {
     setSelectedDistrict(district);
-    setDeliveryFee(deliveryFee [district] || 0);
+    // setDeliveryFee(deliveryFee [district] || 0);
   };
 
   const calculateTotalPayment = () => {
@@ -110,11 +110,11 @@ const OrderPopup: React.FC<OrderPopupProps> = ({
         {selectedRegion && (
           <select onChange={(e) => handleDistrictChange(e.target.value)}>
             <option value="">Pilih Kecamatan</option>
-            {regionOptions[selectedRegion].map((district) => (
+            {/* {regionOptions[selectedRegion].map((district) => (
               <option key={district} value={district}>
                 {district}
               </option>
-            ))}
+            ))} */}
           </select>
         )}
         <textarea
