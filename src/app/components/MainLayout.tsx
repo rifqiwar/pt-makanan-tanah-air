@@ -5,6 +5,7 @@ import SearchBar from "./SearchBar";
 import OrderPopup from "./OrderPopup";
 import styles from "./MainLayout.module.css";
 import ProductPopup from "./ProductPopUp";
+import BottomNavBar from "./BottomNavBar";
 
 interface MenuItem {
   id: number;
@@ -42,7 +43,8 @@ const MainLayout: React.FC = () => {
     },
     {
       id: 2,
-      image: "https://akcdn.detik.net.id/community/media/visual/2024/09/29/resep-ayam-balado-ala-rm-padang_43.jpeg?w=700&q=90",
+      image:
+        "https://akcdn.detik.net.id/community/media/visual/2024/09/29/resep-ayam-balado-ala-rm-padang_43.jpeg?w=700&q=90",
       name: "Nasi Ayam Balado",
       price: 10000,
       quantity: 0,
@@ -57,7 +59,8 @@ const MainLayout: React.FC = () => {
     },
     {
       id: 3,
-      image: "https://awsimages.detik.net.id/community/media/visual/2024/02/07/resep-ayam-bakar-jawa_43.jpeg?w=1200",
+      image:
+        "https://awsimages.detik.net.id/community/media/visual/2024/02/07/resep-ayam-bakar-jawa_43.jpeg?w=1200",
       name: "Nasi Ayam Bakar",
       price: 10000,
       quantity: 0,
@@ -72,7 +75,8 @@ const MainLayout: React.FC = () => {
     },
     {
       id: 4,
-      image: "https://i0.wp.com/makanmana.net/wp-content/uploads/2015/03/paket-nasi-lele.jpg?w=600&ssl=1",
+      image:
+        "https://i0.wp.com/makanmana.net/wp-content/uploads/2015/03/paket-nasi-lele.jpg?w=600&ssl=1",
       name: "Paket Nasi Lele",
       price: 13000,
       quantity: 0,
@@ -87,7 +91,8 @@ const MainLayout: React.FC = () => {
     },
     {
       id: 5,
-      image: "https://awsimages.detik.net.id/community/media/visual/2023/02/05/resep-nasi-goreng-telur_43.jpeg?w=1200",
+      image:
+        "https://awsimages.detik.net.id/community/media/visual/2023/02/05/resep-nasi-goreng-telur_43.jpeg?w=1200",
       name: "Paket Nasi Telur",
       price: 13000,
       quantity: 0,
@@ -102,7 +107,8 @@ const MainLayout: React.FC = () => {
     },
     {
       id: 6,
-      image: "https://aslimasako.com/storage/post/new-title-14082023-075149.jpg",
+      image:
+        "https://aslimasako.com/storage/post/new-title-14082023-075149.jpg",
       name: "Nasi Nila",
       price: 15000,
       quantity: 0,
@@ -117,7 +123,8 @@ const MainLayout: React.FC = () => {
     },
     {
       id: 7,
-      image: "https://akcdn.detik.net.id/visual/2021/03/20/ikan-kembung_169.jpeg?w=720&q=90",
+      image:
+        "https://akcdn.detik.net.id/visual/2021/03/20/ikan-kembung_169.jpeg?w=720&q=90",
       name: "Nasi Kembung",
       price: 15000,
       quantity: 0,
@@ -132,7 +139,8 @@ const MainLayout: React.FC = () => {
     },
     {
       id: 8,
-      image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQcbdw5F0YP2LUP-JBd2IkI0rCo83qN6DExXg&s",
+      image:
+        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQcbdw5F0YP2LUP-JBd2IkI0rCo83qN6DExXg&s",
       name: "Nasi Tongkol",
       price: 15000,
       quantity: 0,
@@ -210,7 +218,6 @@ const MainLayout: React.FC = () => {
     // Reload the page to clear order details
     window.location.reload();
   };
-  
 
   const togglePopup = () => setShowPopup(!showPopup);
 

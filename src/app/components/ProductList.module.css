@@ -1,0 +1,21 @@
+/* src/app/components/ProductList.module.css */
+.product-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  justify-content: center;
+}
+
+.product-card {
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  padding: 16px;
+  width: 250px;
+  text-align: center;
+  background-color: #fff;
+}
+
+.product-image {
+  max-width: 100%;
+  border-radius: 8px;
+}

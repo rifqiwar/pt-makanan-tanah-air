@@ -2,9 +2,13 @@ import Image from "next/image";
 import Dashboard from "./dashboard/page";
 import FoodApp from "./dashboard/page";
 import MainLayout from "./components/MainLayout";
+import Auth from "@/firebase/Auth";
+import Halaman from "./pages/index/page";
 
 export default function Home() {
   return (
-    <MainLayout/>
+    <Halaman />
+    // <MainLayout/>
+    // <Auth />
   );
 }

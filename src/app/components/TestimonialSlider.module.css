@@ -1,0 +1,30 @@
+/* src/app/components/TestimonialSlider.module.css */
+.testimonialSlider {
+  display: flex;
+  overflow: hidden;
+  position: relative;
+  width: 100%;
+}
+
+.testimonialCard {
+  width: 100%;
+  flex-shrink: 0;
+  transition: transform 0.5s ease-in-out;
+  opacity: 0;
+  visibility: hidden;
+}
+
+.active {
+  opacity: 1;
+  visibility: visible;
+}
+
+.photo {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+}
+
+.inactive{
+  visibility: hidden;
+}
