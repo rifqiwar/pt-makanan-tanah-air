@@ -38,4 +38,5 @@ export interface Product {
   composition: string;
   deliveryTime: string;
   date: string;
+  tags:string[];
 }
