@@ -5,26 +5,26 @@ import React, { useState, useEffect } from "react";
 import { db } from "@/firebase/firebaseConfig";
 import { collection, getDocs, deleteDoc, doc } from "firebase/firestore";
 import AddProductForm from "@/app/components/AddProductForm";
-// import AddProductForm from "@/app/components/AddProductForm";
 
 interface Product {
   id: string;
   name: string;
   price: number;
   image: string;
-  quantity:number;
-  rating:number;
-  reviews:number;
-  description:string;
-  brand:string;
-  composition:string;
+  quantity: number;
+  rating: number;
+  reviews: number;
+  description: string;
+  brand: string;
+  composition: string;
   category: string;
+  tags: string[];
 }
 
 const ProductManagement: React.FC = () => {
   const [products, setProducts] = useState<Product[]>([]);
   const [showModal, setShowModal] = useState(false);
-  const [selectedProduct, setSelectedProduct] = useState<Product | null>(null); // State for selected product
+  const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
 
   // Fetch products from Firestore
   const fetchProducts = async () => {
@@ -86,7 +86,7 @@ const ProductManagement: React.FC = () => {
             <div className="flex space-x-2 mt-2">
               <button
                 className="bg-yellow-500 text-white px-4 py-2 rounded"
-                onClick={() => handleEditProduct(product)} // Open form for editing
+                onClick={() => handleEditProduct(product)}
               >
                 Edit
               </button>
@@ -107,7 +107,11 @@ const ProductManagement: React.FC = () => {
             setSelectedProduct(null); // Clear selected product on close
           }}
           onProductAdded={fetchProducts}
-          productToEdit={selectedProduct} // Pass the selected product for editing
+          productToEdit={
+            selectedProduct
+              ? { ...selectedProduct, tags: selectedProduct.tags || [] }
+              : null
+          }
         />
       )}
     </div>
