@@ -72,7 +72,7 @@ const ProductManagement: React.FC = () => {
       >
         Add Product
       </button>
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 mt-4">
+      <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-2 gap-2 mt-2">
         {products.map((product) => (
           <div key={product.id} className="bg-white shadow rounded p-4">
             <img

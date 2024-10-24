@@ -7,6 +7,7 @@ import {
   IoTimeOutline,
   IoPersonOutline,
 } from "react-icons/io5"; // Gunakan react-icons
+import Link from "next/link";
 
 const BottomNav: React.FC = () => {
   const [activeTab, setActiveTab] = useState<string>("Home");
@@ -17,41 +18,47 @@ const BottomNav: React.FC = () => {
 
   return (
     <div className={styles.bottomNav}>
+      <Link href="/" passHref>
+        <div
+          className={`${styles.navItem} ${
+            activeTab === "Home" ? styles.active : ""
+          }`}
+          onClick={() => handleTabClick("Home")}
+        >
+          <IoHomeOutline className={styles.navIcon} />
+          <span>Home</span>
+        </div>
+      </Link>
+      <Link href="/pages/main/product" passHref>
+        <div
+          className={`${styles.navItem} ${
+            activeTab === "Paket" ? styles.active : ""
+          }`}
+          onClick={() => handleTabClick("Paket")}
+        >
+          <IoSearchOutline className={styles.navIcon} />
+          <span>Paket</span>
+        </div>
+      </Link>
+      <Link href="/pages/main/testimoni" passHref>
+        <div
+          className={`${styles.navItem} ${
+            activeTab === "Testimoni" ? styles.active : ""
+          }`}
+          onClick={() => handleTabClick("Testimoni")}
+        >
+          <IoTimeOutline className={styles.navIcon} />
+          <span>Testimoni</span>
+        </div>
+      </Link>
       <div
         className={`${styles.navItem} ${
-          activeTab === "Home" ? styles.active : ""
+          activeTab === "Reverensi" ? styles.active : ""
         }`}
-        onClick={() => handleTabClick("Home")}
-      >
-        <IoHomeOutline className={styles.navIcon} />
-        <span>Nasi Kotak</span>
-      </div>
-      <div
-        className={`${styles.navItem} ${
-          activeTab === "Search" ? styles.active : ""
-        }`}
-        onClick={() => handleTabClick("Search")}
-      >
-        <IoSearchOutline className={styles.navIcon} />
-        <span>Paket</span>
-      </div>
-      <div
-        className={`${styles.navItem} ${
-          activeTab === "History" ? styles.active : ""
-        }`}
-        onClick={() => handleTabClick("History")}
-      >
-        <IoTimeOutline className={styles.navIcon} />
-        <span>Pemesanan</span>
-      </div>
-      <div
-        className={`${styles.navItem} ${
-          activeTab === "Profile" ? styles.active : ""
-        }`}
-        onClick={() => handleTabClick("Profile")}
+        onClick={() => handleTabClick("Reverensi")}
       >
         <IoPersonOutline className={styles.navIcon} />
-        <span>Tentang Kami</span>
+        <span>Reverensi</span>
       </div>
     </div>
   );

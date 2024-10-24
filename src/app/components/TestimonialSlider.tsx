@@ -53,7 +53,8 @@ const TestimonialSlider: React.FC = () => {
         >
           {testimonials.map((testimonial) => (
             <div key={testimonial.id} className="min-w-full flex-shrink-0 p-4">
-              <div className="bg-white shadow-lg rounded-lg p-6 text-center">
+              
+              <div className="bg-[#fdf5e6] p-6 text-center">
                 <img
                   src={testimonial.photo}
                   alt={testimonial.name}

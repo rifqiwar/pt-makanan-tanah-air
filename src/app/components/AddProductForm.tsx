@@ -172,6 +172,7 @@ const AddProductForm: React.FC<AddProductFormProps> = ({
       !product.category ||
       !product.description ||
       !product.rating ||
+      !product.composition ||
       !imageFile
     ) {
       setMessage("Please fill in all required fields.");
@@ -310,6 +311,16 @@ const AddProductForm: React.FC<AddProductFormProps> = ({
               type="number"
               name="rating"
               value={product.rating}
+              onChange={handleChange}
+              className="w-full mt-1 p-2 border rounded"
+              required
+            />
+          </div>
+          <div>
+            <label className="block text-gray-700">Komposisi</label>
+            <textarea
+              name="composition"
+              value={product.composition}
               onChange={handleChange}
               className="w-full mt-1 p-2 border rounded"
               required

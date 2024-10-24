@@ -352,7 +352,7 @@ const ProductList: React.FC = () => {
               className="w-full h-32 object-cover rounded-md"
               onClick={() => openPopup(product)}
             />
-            
+
             <div className="mt-2 flex justify-between items-center">
               <h3 className="font-bold">{product.name}</h3>
             </div>
@@ -362,17 +362,17 @@ const ProductList: React.FC = () => {
               <span className="ml-2 text-yellow-400">★</span>
               <span className="ml-1 text-gray-500">({product.reviews})</span>
             </div>
-            <div>
+            {/* <div>
               <div className={styles.counter}>
-                <button
-                  onClick={() => handleQuantityChange(index, -1)}
-                >
+                <button onClick={() => handleQuantityChange(index, -1)}>
                   -
                 </button>
                 <span>{product.quantity ?? 0}</span>
-                <button onClick={() => handleQuantityChange(index, 1)}>+</button>
+                <button onClick={() => handleQuantityChange(index, 1)}>
+                  +
+                </button>
               </div>
-            </div>
+            </div> */}
           </div>
         ))}
         <ProductPopup
@@ -390,6 +390,7 @@ const ProductList: React.FC = () => {
                   composition: selectedProduct.composition ?? "",
                   date: selectedProduct.date ?? "",
                   deliveryTime: selectedProduct.deliveryTime ?? "",
+                  quantity: selectedProduct.quantity ?? 0,
                 }
               : null
           }

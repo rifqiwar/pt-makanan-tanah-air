@@ -8,22 +8,34 @@ const ProfileSettings = () => {
   const router = useRouter();
 
   const navigateToProductManagement = () => {
-    router.push("pages/add-product");
+    router.push("pages/setting/add-product");
   };
   const navigateToTambahKategori = () => {
-    router.push("pages/add-categories");
+    router.push("pages/setting/add-categories");
   };
   const navigateToTambahSlider = () => {
-    router.push("pages/add-slider");
+    router.push("pages/setting/add-slider");
   };
   const navigateToTambahKetCatering = () => {
-    router.push("pages/add-catering");
+    router.push("pages/setting/add-catering");
   };
   const navigateToTambahTesti = () => {
-    router.push("pages/add-testi");
+    router.push("pages/setting/add-testi");
   };
   const navigateToTambahTags = () => {
-    router.push("pages/add-tags");
+    router.push("pages/setting/add-tags");
+  };
+  const navigateToEditHeader = () => {
+    router.push("pages/setting/edit-header");
+  };
+  const navigateToEditFooter = () => {
+    router.push("pages/setting/edit-footer");
+  };
+  const navigateToAddAccordeon = () => {
+    router.push("pages/setting/add-accordeon");
+  };
+  const navigateToWaButton = () => {
+    router.push("pages/setting/wa-button");
   };
 
   return (
@@ -78,16 +90,28 @@ const ProfileSettings = () => {
 
           <h2 className="text-gray-600 text-sm mb-2">Setting Toko</h2>
           <button
-            onClick={navigateToTambahKetCatering}
+            onClick={navigateToEditHeader}
             className="flex items-center w-full text-left text-gray-800 hover:bg-gray-50 p-3 rounded-lg border border-gray-300"
           >
             Setting Header
           </button>
           <button
-            onClick={navigateToTambahKetCatering}
+            onClick={navigateToEditFooter}
             className="flex items-center w-full text-left text-gray-800 hover:bg-gray-50 p-3 rounded-lg border border-gray-300"
           >
             Setting Footer
+          </button>
+          <button
+            onClick={navigateToAddAccordeon}
+            className="flex items-center w-full text-left text-gray-800 hover:bg-gray-50 p-3 rounded-lg border border-gray-300"
+          >
+            Setting Accordeon
+          </button>
+          <button
+            onClick={navigateToWaButton}
+            className="flex items-center w-full text-left text-gray-800 hover:bg-gray-50 p-3 rounded-lg border border-gray-300"
+          >
+            WA Button
           </button>
           {/* Other buttons */}
         </div>

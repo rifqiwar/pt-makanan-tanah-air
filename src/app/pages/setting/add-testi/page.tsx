@@ -20,6 +20,7 @@ interface Testimonial {
   name: string;
   photo: string;
   message: string;
+  imageUrl: string;
 }
 
 const ManageTestimonials: React.FC = () => {
@@ -28,7 +29,9 @@ const ManageTestimonials: React.FC = () => {
     name: "",
     photo: "",
     message: "",
+    imageUrl: "",
   });
+  const [photoFile, setPhotoFile] = useState<File | null>(null);
   const [imageFile, setImageFile] = useState<File | null>(null);
   const [isEditing, setIsEditing] = useState<string | null>(null);
 
@@ -58,18 +61,21 @@ const ManageTestimonials: React.FC = () => {
     }));
   };
 
+  const handlePhotoChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (e.target.files && e.target.files[0]) {
+      setPhotoFile(e.target.files[0]);
+    }
+  };
+
   const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files && e.target.files[0]) {
       setImageFile(e.target.files[0]);
     }
   };
 
-  const uploadImage = async (): Promise<string> => {
-    if (!imageFile) {
-      throw new Error("No image file selected");
-    }
-    const storageRef = ref(storage, `testimonials/${imageFile.name}`);
-    await uploadBytes(storageRef, imageFile);
+  const uploadFile = async (file: File, folder: string): Promise<string> => {
+    const storageRef = ref(storage, `${folder}/${file.name}`);
+    await uploadBytes(storageRef, file);
     return await getDownloadURL(storageRef);
   };
 
@@ -77,27 +83,32 @@ const ManageTestimonials: React.FC = () => {
     e.preventDefault();
     try {
       let photoUrl = newTestimonial.photo;
+      let imageUrl = newTestimonial.imageUrl;
+      if (photoFile) {
+        photoUrl = await uploadFile(photoFile, "testimonials/photos");
+      }
       if (imageFile) {
-        photoUrl = await uploadImage();
+        imageUrl = await uploadFile(imageFile, "testimonials/images");
       }
 
+      const testimonialData = {
+        name: newTestimonial.name,
+        photo: photoUrl,
+        message: newTestimonial.message,
+        imageUrl: imageUrl,
+        createdAt: new Date(),
+      };
+
       if (isEditing) {
-        await updateDoc(doc(db, "testimonials", isEditing), {
-          name: newTestimonial.name,
-          photo: photoUrl,
-          message: newTestimonial.message,
-        });
+        await updateDoc(doc(db, "testimonials", isEditing), testimonialData);
         setIsEditing(null);
         alert("Testimonial successfully updated!");
       } else {
-        await addDoc(collection(db, "testimonials"), {
-          ...newTestimonial,
-          photo: photoUrl,
-          createdAt: new Date(),
-        });
+        await addDoc(collection(db, "testimonials"), testimonialData);
         alert("Testimonial successfully added!");
       }
-      setNewTestimonial({ name: "", photo: "", message: "" });
+      setNewTestimonial({ name: "", photo: "", message: "", imageUrl: "" });
+      setPhotoFile(null);
       setImageFile(null);
     } catch (error) {
       console.error("Error adding/updating testimonial:", error);
@@ -105,12 +116,19 @@ const ManageTestimonials: React.FC = () => {
   };
 
   const handleEdit = (testimonial: Testimonial) => {
-    setNewTestimonial(testimonial);
+    setNewTestimonial({
+      name: testimonial.name,
+      photo: testimonial.photo,
+      message: testimonial.message,
+      imageUrl: testimonial.imageUrl,
+    });
     setIsEditing(testimonial.id || null);
   };
 
   const handleDelete = async (id: string) => {
-    const confirmDelete = window.confirm("Are you sure you want to delete this testimonial?");
+    const confirmDelete = window.confirm(
+      "Are you sure you want to delete this testimonial?"
+    );
     if (!confirmDelete) return;
     try {
       await deleteDoc(doc(db, "testimonials", id));
@@ -122,10 +140,15 @@ const ManageTestimonials: React.FC = () => {
 
   return (
     <div className="max-w-3xl mx-auto p-6 bg-white shadow-md rounded-lg">
-      <h2 className="text-2xl font-semibold mb-6 text-center">Manage Testimonials</h2>
+      <h2 className="text-2xl font-semibold mb-6 text-center">
+        Manage Testimonials
+      </h2>
       <form onSubmit={handleAddOrUpdateTestimonial} className="space-y-4">
         <div>
-          <label htmlFor="name" className="block text-sm font-medium text-gray-700">
+          <label
+            htmlFor="name"
+            className="block text-sm font-medium text-gray-700"
+          >
             Name:
           </label>
           <input
@@ -139,7 +162,10 @@ const ManageTestimonials: React.FC = () => {
           />
         </div>
         <div>
-          <label htmlFor="message" className="block text-sm font-medium text-gray-700">
+          <label
+            htmlFor="message"
+            className="block text-sm font-medium text-gray-700"
+          >
             Message:
           </label>
           <textarea
@@ -152,8 +178,25 @@ const ManageTestimonials: React.FC = () => {
           />
         </div>
         <div>
-          <label htmlFor="image" className="block text-sm font-medium text-gray-700">
+          <label
+            htmlFor="photo"
+            className="block text-sm font-medium text-gray-700"
+          >
             Upload Photo:
+          </label>
+          <input
+            type="file"
+            accept="image/*"
+            onChange={handlePhotoChange}
+            className="mt-1 block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-md file:border-0 file:text-sm file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100"
+          />
+        </div>
+        <div>
+          <label
+            htmlFor="imageUrl"
+            className="block text-sm font-medium text-gray-700"
+          >
+            Upload Image URL:
           </label>
           <input
             type="file"
@@ -165,7 +208,9 @@ const ManageTestimonials: React.FC = () => {
         <button
           type="submit"
           className={`w-full py-2 px-4 rounded-md text-white font-medium ${
-            isEditing ? "bg-yellow-500 hover:bg-yellow-600" : "bg-blue-500 hover:bg-blue-600"
+            isEditing
+              ? "bg-yellow-500 hover:bg-yellow-600"
+              : "bg-blue-500 hover:bg-blue-600"
           }`}
         >
           {isEditing ? "Update Testimonial" : "Add Testimonial"}
@@ -182,6 +227,11 @@ const ManageTestimonials: React.FC = () => {
             <div className="flex items-center">
               <img
                 src={testimonial.photo}
+                alt={testimonial.name}
+                className="w-16 h-16 object-cover rounded-full mr-4"
+              />
+              <img
+                src={testimonial.imageUrl}
                 alt={testimonial.name}
                 className="w-16 h-16 object-cover rounded-full mr-4"
               />
