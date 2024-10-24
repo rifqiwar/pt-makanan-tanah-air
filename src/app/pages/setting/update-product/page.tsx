@@ -1,6 +1,6 @@
 // src/app/update-product.tsx
+import UpdateProductForm from "@/app/components/UpdateProductForm";
 import React from "react";
-import UpdateProductForm from "../../components/UpdateProductForm";
 
 const UpdateProductPage: React.FC = () => {
   return (
